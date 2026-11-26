@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { LocationData } from '../types';
 import { HOURLY_24H_CURVE } from '../data/mockData';
 import { AqiBadge } from './AqiBadge';
+import { AtmosphericSimCanvas } from './AtmosphericSimCanvas';
 import {
   Wind,
   Sun,
@@ -232,6 +233,9 @@ export const BarometerView: React.FC<BarometerViewProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Live Atmospheric Boundary Layer Physics Simulation */}
+      <AtmosphericSimCanvas location={location} />
 
       {/* 24-Hour Inversion Curve Visualization */}
       <section
