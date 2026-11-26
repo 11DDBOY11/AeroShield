@@ -52,19 +52,48 @@ export const BarometerView: React.FC<BarometerViewProps> = ({
   const ventEndX = ventPoints[ventPoints.length - 1]?.x || 0;
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8 animate-fade-in relative">
+      {/* Ambient Floating Air Breeze Particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
+        <div className="air-particle w-64 h-64 top-10 left-1/4 animate-float-slow opacity-20" />
+        <div className="air-particle w-96 h-96 top-1/2 right-10 animate-breeze opacity-15" />
+      </div>
+
       {/* Top Banner: Inversion & Golden Ventilation Alert */}
       <section
         aria-labelledby="inversion-banner-title"
-        className="rounded-2xl border border-cyan-500/30 bg-gradient-to-r from-cyan-950/60 via-slate-900 to-sky-950/50 p-6 shadow-xl relative overflow-hidden"
+        className="rounded-2xl border border-cyan-500/30 bg-gradient-to-r from-cyan-950/60 via-slate-900 to-sky-950/50 p-6 shadow-xl relative overflow-hidden ai-shimmer-border"
       >
-        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" />
+
+        {/* Animated Breeze Wave SVG */}
+        <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none opacity-20 overflow-hidden">
+          <svg className="w-full h-full animate-breeze" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path
+              d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,50 L1200,120 L0,120 Z"
+              fill="url(#wave-gradient)"
+            />
+            <defs>
+              <linearGradient id="wave-gradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#06b6d4" />
+                <stop offset="50%" stopColor="#10b981" />
+                <stop offset="100%" stopColor="#38bdf8" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
-              <Sun className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Winter Thermal Inversion Tracker</span>
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                <Sun className="w-3.5 h-3.5 text-cyan-300" aria-hidden="true" />
+                <span>Winter Thermal Inversion Tracker</span>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-950/70 border border-slate-700/80 text-slate-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 live-pulse-radar" />
+                <span>{location.dataSource || 'Open-Meteo & CAMS Telemetry'}</span>
+              </div>
             </div>
             <h2 id="inversion-banner-title" className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
               Golden Ventilation Window: {location.ventilationWindow.start} – {location.ventilationWindow.end}
@@ -142,7 +171,7 @@ export const BarometerView: React.FC<BarometerViewProps> = ({
               Atmospheric Cold Cap
             </h3>
             <p className="text-xs text-slate-400 leading-normal">
-              Surface temperature is {location.temperature}°C with {location.humidity}% humidity. Pollutants are pinned below 180 meters.
+              Surface temperature is {location.temperature}°C with {location.humidity}% humidity. Planetary Boundary Layer is capped at {location.boundaryLayerM || 210}m with Inversion Trap Index of {location.inversionIndex ? `${location.inversionIndex}/100` : '82/100'}. Ground emissions cannot disperse vertically.
             </p>
           </div>
 

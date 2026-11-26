@@ -33,6 +33,105 @@ KNOWN_HOTSPOTS: Dict[str, HotspotInfo] = {
         typical_winter_aqi=385,
         peak_inversion_months=["November", "December", "January", "February"],
     ),
+    "mumbai": HotspotInfo(
+        id="mumbai",
+        city="Mumbai",
+        country="India",
+        latitude=19.0760,
+        longitude=72.8777,
+        smog_driver="Coastal thermal inversion + sea-land breeze particulate trapping + construction dust",
+        inversion_phenomenon="Marine-capping temperature inversion with stagnant morning sea breeze",
+        typical_winter_aqi=190,
+        peak_inversion_months=["November", "December", "January"],
+    ),
+    "kolkata": HotspotInfo(
+        id="kolkata",
+        city="Kolkata",
+        country="India",
+        latitude=22.5726,
+        longitude=88.3639,
+        smog_driver="Gangetic delta river-basin moisture haze + municipal biomass & diesel transit surge",
+        inversion_phenomenon="Low-level deltaic fog inversion trapping surface aerosols under 200m",
+        typical_winter_aqi=260,
+        peak_inversion_months=["December", "January", "February"],
+    ),
+    "lucknow": HotspotInfo(
+        id="lucknow",
+        city="Lucknow",
+        country="India",
+        latitude=26.8467,
+        longitude=80.9462,
+        smog_driver="Central Indo-Gangetic radiation cooling + dense agricultural smoke drift",
+        inversion_phenomenon="Extreme nocturnal radiation inversion cap with zero surface wind",
+        typical_winter_aqi=320,
+        peak_inversion_months=["November", "December", "January", "February"],
+    ),
+    "patna": HotspotInfo(
+        id="patna",
+        city="Patna",
+        country="India",
+        latitude=25.5941,
+        longitude=85.1376,
+        smog_driver="Low-elevation alluvial basin + brick kilns + domestic solid fuel burning",
+        inversion_phenomenon="Severe thermal inversion lid blocking vertical particulate dispersion",
+        typical_winter_aqi=340,
+        peak_inversion_months=["November", "December", "January"],
+    ),
+    "kanpur": HotspotInfo(
+        id="kanpur",
+        city="Kanpur",
+        country="India",
+        latitude=26.4499,
+        longitude=80.3319,
+        smog_driver="Heavy industrial emissions + unpaved road dust + trapped winter chill subsidence",
+        inversion_phenomenon="Persistent ground-level cold pool with sub-250m boundary layer height",
+        typical_winter_aqi=330,
+        peak_inversion_months=["November", "December", "January"],
+    ),
+    "chandigarh": HotspotInfo(
+        id="chandigarh",
+        city="Chandigarh",
+        country="India",
+        latitude=30.7333,
+        longitude=76.7794,
+        smog_driver="Himalayan foothills cold air drainage + regional stubble haze + vehicular sprawl",
+        inversion_phenomenon="Katabatic foothill thermal inversion causing morning smog stagnant layer",
+        typical_winter_aqi=210,
+        peak_inversion_months=["October", "November", "December"],
+    ),
+    "bengaluru": HotspotInfo(
+        id="bengaluru",
+        city="Bengaluru",
+        country="India",
+        latitude=12.9716,
+        longitude=77.5946,
+        smog_driver="High-density traffic corridor valleys + winter morning cold subsidence",
+        inversion_phenomenon="Valley-bottom micro-inversions along ring roads & arterial expressways",
+        typical_winter_aqi=140,
+        peak_inversion_months=["December", "January"],
+    ),
+    "hyderabad": HotspotInfo(
+        id="hyderabad",
+        city="Hyderabad",
+        country="India",
+        latitude=17.3850,
+        longitude=78.4867,
+        smog_driver="Deccan plateau dry winter dust + vehicular exhaust trapped in urban street canyons",
+        inversion_phenomenon="Shallow radiation inversion lifting sharply by midday solar heating",
+        typical_winter_aqi=155,
+        peak_inversion_months=["November", "December", "January"],
+    ),
+    "ahmedabad": HotspotInfo(
+        id="ahmedabad",
+        city="Ahmedabad",
+        country="India",
+        latitude=23.0225,
+        longitude=72.5714,
+        smog_driver="Semi-arid dust resuspension + textile & chemical industrial clusters + winter high pressure",
+        inversion_phenomenon="Subtropical anticyclonic subsidence inversion with stagnant calm winds",
+        typical_winter_aqi=220,
+        peak_inversion_months=["November", "December", "January"],
+    ),
     "lahore": HotspotInfo(
         id="lahore",
         city="Lahore",
@@ -180,6 +279,33 @@ class AirQualityService:
         if "delhi" in city_name.lower():
             base_pm25 = 260.0
             base_temp = 14.0
+        elif "patna" in city_name.lower():
+            base_pm25 = 250.0
+            base_temp = 15.0
+        elif "kanpur" in city_name.lower():
+            base_pm25 = 245.0
+            base_temp = 14.5
+        elif "lucknow" in city_name.lower():
+            base_pm25 = 240.0
+            base_temp = 15.0
+        elif "kolkata" in city_name.lower():
+            base_pm25 = 190.0
+            base_temp = 19.0
+        elif "ahmedabad" in city_name.lower():
+            base_pm25 = 160.0
+            base_temp = 18.0
+        elif "chandigarh" in city_name.lower():
+            base_pm25 = 150.0
+            base_temp = 12.0
+        elif "mumbai" in city_name.lower():
+            base_pm25 = 135.0
+            base_temp = 22.0
+        elif "hyderabad" in city_name.lower():
+            base_pm25 = 115.0
+            base_temp = 20.0
+        elif "bengaluru" in city_name.lower():
+            base_pm25 = 95.0
+            base_temp = 19.5
         elif "lahore" in city_name.lower():
             base_pm25 = 290.0
             base_temp = 13.0

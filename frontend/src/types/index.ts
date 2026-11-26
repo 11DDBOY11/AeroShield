@@ -18,6 +18,13 @@ export interface LocationData {
     peakCleanHour: string;
     minAqi: number;
   };
+  latitude?: number;
+  longitude?: number;
+  inversionIndex?: number;
+  boundaryLayerM?: number;
+  isLive?: boolean;
+  lastUpdated?: string;
+  dataSource?: string;
 }
 
 export interface HourlyForecast {
